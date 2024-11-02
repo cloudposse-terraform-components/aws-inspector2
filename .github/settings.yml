@@ -1,11 +1,7 @@
 # Upstream changes from _extends are only recognized when modifications are made to this file in the default branch.
 _extends: .github
 repository:
-  name: template
-  description: Template for Terraform Components
+  name: aws-inspector2
+  description: This component is responsible for configuring Inspector V2 within an AWS Organization
   homepage: https://cloudposse.com/accelerate
   topics: terraform, terraform-component
-
-
-
-

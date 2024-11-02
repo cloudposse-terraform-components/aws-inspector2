@@ -1,70 +1,96 @@
-name: "template"
-
+name: "aws-inspector2"
 # Canonical GitHub repo
-github_repo: "cloudposse-terraform-components/template"
-
+github_repo: "cloudposse-terraform-components/aws-inspector2"
 # Short description of this project
 description: |-
-  Description of this component
+  This component is responsible for configuring Inspector V2 within an AWS Organization.
 
-usage: |-
-  **Stack Level**: Regional or Test47
+  ## Usage
 
-  Here's an example snippet for how to use this component.
-  
+  **Stack Level**: Regional
+
+  ## Deployment Overview
+
+  The deployment of this component requires multiple runs with different variable settings to properly configure the AWS
+  Organization. First, you delegate Inspector V2 central management to the Administrator account (usually `security`
+  account). After the Administrator account is delegated, we configure the it to manage Inspector V2 across all the
+  Organization accounts and send all their findings to that account.
+
+  In the examples below, we assume that the AWS Organization Management account is `root` and the AWS Organization
+  Delegated Administrator account is `security`.
+
+  ### Deploy to Organization Management Account
+
+  First, the component is deployed to the AWS Organization Management account `root` in each region in order to configure
+  the [AWS Delegated Administrator account](https://docs.aws.amazon.com/inspector/latest/user/designating-admin.html) that
+  operates Amazon Inspector V2.
+
   ```yaml
+  # ue1-root
   components:
     terraform:
-      foo:
+      aws-inspector2/delegate-orgadmin/ue1:
+        metadata:
+          component: aws-inspector2
         vars:
           enabled: true
+          region: us-east-1
   ```
 
+  ### Deploy Organization Settings in Delegated Administrator Account
+
+  Now the component can be deployed to the Delegated Administrator Account `security` to create the organization-wide
+  configuration for all the Organization accounts. Note that `var.admin_delegated` set to `true` indicates that the
+  delegation has already been performed from the Organization Management account, and only the resources required for
+  organization-wide configuration will be created.
+
+  ```yaml
+  # ue1-security
+  components:
+    terraform:
+      aws-inspector2/orgadmin-configuration/ue1:
+        metadata:
+          component: aws-inspector2
+        vars:
+          enabled: true
+          region: us-east-1
+          admin_delegated: true
+  ```
+
+  <!-- prettier-ignore-start -->
+
+  <!-- prettier-ignore-end -->
+
+  ## References
+
+  - [Amazon Inspector V2 Documentation](https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html)
+  - [Cloud Posse's upstream component](https://github.com/cloudposse/terraform-aws-components/tree/main/modules/guardduty/common/)
 include:
   - "docs/terraform.md"
-
 tags:
-  - terraform
-  - terraform-modules
-  - aws
-  - components
-  - terraform-components
-  - root
-  - geodesic
-  - reference-implementation
-  - reference-architecture
-
+  - component/aws-inspector2
+  - layer/security-and-compliance
+  - provider/aws
 # Categories of this project
 categories:
-  - terraform-modules/root
-  - terraform-components
-
+  - component/aws-inspector2
+  - layer/security-and-compliance
+  - provider/aws
 # License of this project
 license: "APACHE2"
-
 # Badges to display
 badges:
-  - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse-terraform-components/template.svg?style=for-the-badge"
-    url: "https://github.com/cloudposse-terraform-components/template/releases/latest"
-  - name: "Slack Community"
-    image: "https://slack.cloudposse.com/for-the-badge.svg"
-    url: "https://slack.cloudposse.com"
-
-references:
-  - name: "Cloud Posse Documentation"
-    description: "Complete documentation for the Cloud Posse solution"
-    url: "https://docs.cloudposse.com"
-  - name: "Reference Architectures"
-    description: "Launch effortlessly with our turnkey reference architectures, built either by your team or ours."
-    url: "https://cloudposse.com/"
-
+  - name: Latest Release
+    image: https://img.shields.io/github/release/cloudposse-terraform-components/aws-inspector2.svg?style=for-the-badge
+    url: https://github.com/cloudposse-terraform-components/aws-inspector2/releases/latest
+  - name: Slack Community
+    image: https://slack.cloudposse.com/for-the-badge.svg
+    url: https://slack.cloudposse.com
 related:
-- name: "Cloud Posse Terraform Modules"
-  description: Our collection of reusable Terraform modules used by our reference architectures.
-  url: "https://docs.cloudposse.com/modules/"
-- name: "Atmos"
-  description: "Atmos is like docker-compose but for your infrastructure"
-  url: "https://atmos.tools"
-
+  - name: "Cloud Posse Terraform Modules"
+    description: Our collection of reusable Terraform modules used by our reference architectures.
+    url: "https://docs.cloudposse.com/modules/"
+  - name: "Atmos"
+    description: "Atmos is like docker-compose but for your infrastructure"
+    url: "https://atmos.tools"
 contributors: [] # If included generates contribs
