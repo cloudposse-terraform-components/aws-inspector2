@@ -55,7 +55,7 @@ variable "organization_management_account_name" {
 }
 
 variable "member_association_excludes" {
-  description = "List of account names to exlude from Amazon Inspector member association"
+  description = "List of account names to exclude from Amazon Inspector member association"
   type        = list(string)
   default     = []
 }

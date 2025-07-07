@@ -14,7 +14,7 @@ locals {
   create_org_delegation    = local.enabled && local.is_org_management_account
   create_org_configuration = local.enabled && local.is_org_delegated_administrator_account && var.admin_delegated
 
-  resource_types = compact([var.auto_enable_ec2 ? "EC2" : null, var.auto_enable_ecr ? "ECR" : null, var.auto_enable_lambda ? "Lambda" : null])
+  resource_types = compact([var.auto_enable_ec2 ? "EC2" : null, var.auto_enable_ecr ? "ECR" : null, var.auto_enable_lambda ? "LAMBDA" : null])
 }
 
 data "aws_caller_identity" "this" {
