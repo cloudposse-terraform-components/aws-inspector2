@@ -8,7 +8,6 @@ tags:
 # Component: `inspector2`
 
 This component is responsible for configuring Inspector V2 within an AWS Organization.
-
 ## Usage
 
 **Stack Level**: Regional
@@ -17,7 +16,7 @@ This component is responsible for configuring Inspector V2 within an AWS Organiz
 
 The deployment of this component requires multiple runs with different variable settings to properly configure the AWS
 Organization. First, you delegate Inspector V2 central management to the Administrator account (usually `security`
-account). After the Administrator account is delegated, we configure the it to manage Inspector V2 across all the
+account). After the Administrator account is delegated, we configure it to manage Inspector V2 across all the
 Organization accounts and send all their findings to that account.
 
 In the examples below, we assume that the AWS Organization Management account is `root` and the AWS Organization
@@ -61,8 +60,8 @@ components:
         admin_delegated: true
 ```
 
-<!-- prettier-ignore-start -->
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -136,12 +135,19 @@ components:
 | Name | Description |
 |------|-------------|
 | <a name="output_aws_inspector2_member_association"></a> [aws\_inspector2\_member\_association](#output\_aws\_inspector2\_member\_association) | The Inspector2 member association resource. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
+
+
 
 ## References
 
-- [Amazon Inspector V2 Documentation](https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html)
-- [Cloud Posse's upstream component](https://github.com/cloudposse/terraform-aws-components/tree/main/modules/guardduty/common/)
+
+- [Amazon Inspector V2 Documentation](https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html) - 
+
+- [Cloud Posse's upstream component](https://github.com/cloudposse/terraform-aws-components/tree/main/modules/guardduty/common/) - 
+
+
+
 
 [<img src="https://cloudposse.com/logo-300x69.svg" height="32" align="right"/>](https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse-terraform-components/aws-inspector2&utm_content=)
+
