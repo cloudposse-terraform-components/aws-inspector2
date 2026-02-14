@@ -4,6 +4,16 @@ github_repo: "cloudposse-terraform-components/aws-inspector2"
 # Short description of this project
 description: |-
   This component is responsible for configuring Inspector V2 within an AWS Organization.
+
+  ## Component Features
+
+  - **Delegated Administrator Model**: Uses AWS Organizations delegated administrator pattern for centralized management
+  - **Multi-Region Deployment**: Supports deployment across all AWS regions
+  - **Auto-enablement**: Automatically enables EC2, ECR, and Lambda scanning for organization members
+  - **Member Management**: Configurable member association with exclusion list support
+  - **Account Verification**: Optional safety check that validates Terraform is running in the correct AWS account
+  - **Flexible Account Map**: Supports both remote-state account-map lookups (default) and static account map variables
+
 usage: |-
   **Stack Level**: Regional
 
