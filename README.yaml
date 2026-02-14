@@ -70,7 +70,7 @@ references:
     url: https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html
   - name: Cloud Posse's upstream component
     description: ""
-    url: https://github.com/cloudposse/terraform-aws-components/tree/main/modules/guardduty/common/
+    url: https://github.com/cloudposse/terraform-aws-components/tree/main/modules/inspector2/common/
 tags:
   - component/aws-inspector2
   - layer/security-and-compliance

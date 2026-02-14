@@ -118,7 +118,7 @@ variable "admin_delegated" {
   type        = bool
   default     = false
   description = <<DOC
-  A flag to indicate if the AWS Organization-wide settings should be created. This can only be done after the GuardDuty
+  A flag to indicate if the AWS Organization-wide settings should be created. This can only be done after the Inspector V2
   Administrator account has already been delegated from the AWS Org Management account (usually 'root'). See the
   Deployment section of the README for more information.
   DOC
