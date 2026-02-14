@@ -34,15 +34,13 @@ usage: |-
   operates Amazon Inspector V2.
 
   ```yaml
-  # ue1-root
   components:
     terraform:
-      aws-inspector2/delegate-orgadmin/ue1:
+      aws-inspector2/root:
         metadata:
           component: aws-inspector2
         vars:
           enabled: true
-          region: us-east-1
   ```
 
   ### Deploy Organization Settings in Delegated Administrator Account
@@ -53,15 +51,13 @@ usage: |-
   organization-wide configuration will be created.
 
   ```yaml
-  # ue1-security
   components:
     terraform:
-      aws-inspector2/orgadmin-configuration/ue1:
+      aws-inspector2/org-settings:
         metadata:
           component: aws-inspector2
         vars:
           enabled: true
-          region: us-east-1
           admin_delegated: true
   ```
 references:
