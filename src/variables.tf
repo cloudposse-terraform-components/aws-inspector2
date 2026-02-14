@@ -110,7 +110,7 @@ variable "member_association_excludes" {
 
 variable "delegated_administrator_account_name" {
   type        = string
-  default     = "security"
+  default     = "core-security"
   description = "The name of the account that is the AWS Organization Delegated Administrator account"
 }
 
