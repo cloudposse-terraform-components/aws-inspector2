@@ -4,6 +4,16 @@ github_repo: "cloudposse-terraform-components/aws-inspector2"
 # Short description of this project
 description: |-
   This component is responsible for configuring Inspector V2 within an AWS Organization.
+
+  ## Component Features
+
+  - **Delegated Administrator Model**: Uses AWS Organizations delegated administrator pattern for centralized management
+  - **Multi-Region Deployment**: Supports deployment across all AWS regions
+  - **Auto-enablement**: Automatically enables EC2, ECR, and Lambda scanning for organization members
+  - **Member Management**: Configurable member association with exclusion list support
+  - **Account Verification**: Optional safety check that validates Terraform is running in the correct AWS account
+  - **Flexible Account Map**: Supports both remote-state account-map lookups and static account map variables (default)
+
 usage: |-
   **Stack Level**: Regional
 
@@ -24,15 +34,13 @@ usage: |-
   operates Amazon Inspector V2.
 
   ```yaml
-  # ue1-root
   components:
     terraform:
-      aws-inspector2/delegate-orgadmin/ue1:
+      aws-inspector2/root:
         metadata:
           component: aws-inspector2
         vars:
           enabled: true
-          region: us-east-1
   ```
 
   ### Deploy Organization Settings in Delegated Administrator Account
@@ -43,15 +51,13 @@ usage: |-
   organization-wide configuration will be created.
 
   ```yaml
-  # ue1-security
   components:
     terraform:
-      aws-inspector2/orgadmin-configuration/ue1:
+      aws-inspector2/org-settings:
         metadata:
           component: aws-inspector2
         vars:
           enabled: true
-          region: us-east-1
           admin_delegated: true
   ```
 references:
@@ -60,7 +66,7 @@ references:
     url: https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html
   - name: Cloud Posse's upstream component
     description: ""
-    url: https://github.com/cloudposse/terraform-aws-components/tree/main/modules/guardduty/common/
+    url: https://github.com/cloudposse/terraform-aws-components/tree/main/modules/inspector2/common/
 tags:
   - component/aws-inspector2
   - layer/security-and-compliance
