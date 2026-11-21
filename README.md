@@ -36,7 +36,7 @@ This component is responsible for configuring Inspector V2 within an AWS Organiz
 
 - **Delegated Administrator Model**: Uses AWS Organizations delegated administrator pattern for centralized management
 - **Multi-Region Deployment**: Supports deployment across all AWS regions
-- **Auto-enablement**: Automatically enables EC2, ECR, and Lambda scanning (and optionally Lambda code scanning) for organization members
+- **Auto-enablement**: Automatically enables EC2, ECR, and Lambda scanning for organization members
 - **Member Management**: Configurable member association with exclusion list support
 - **Account Verification**: Optional safety check that validates Terraform is running in the correct AWS account
 - **Flexible Account Map**: Supports both remote-state account-map lookups and static account map variables (default)
@@ -124,14 +124,14 @@ components:
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.25.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0.0 |
 | <a name="requirement_awsutils"></a> [awsutils](#requirement\_awsutils) | >= 0.16.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.25.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
@@ -168,7 +168,6 @@ components:
 | <a name="input_auto_enable_ec2"></a> [auto\_enable\_ec2](#input\_auto\_enable\_ec2) | Whether Amazon EC2 scans are automatically enabled for new members of the Amazon Inspector organization. | `bool` | `true` | no |
 | <a name="input_auto_enable_ecr"></a> [auto\_enable\_ecr](#input\_auto\_enable\_ecr) | Whether Amazon ECR scans are automatically enabled for new members of the Amazon Inspector organization. | `bool` | `true` | no |
 | <a name="input_auto_enable_lambda"></a> [auto\_enable\_lambda](#input\_auto\_enable\_lambda) | Whether Lambda Function scans are automatically enabled for new members of the Amazon Inspector organization. | `bool` | `true` | no |
-| <a name="input_auto_enable_lambda_code"></a> [auto\_enable\_lambda\_code](#input\_auto\_enable\_lambda\_code) | Whether AWS Lambda code scans are enabled for the delegated administrator and existing member accounts, and<br/>automatically enabled for new members of the Amazon Inspector organization. Lambda code scanning requires Lambda<br/>standard scanning, so it only takes effect when `auto_enable_lambda` is also `true`. | `bool` | `false` | no |
 | <a name="input_context"></a> [context](#input\_context) | Single object for setting entire context at once.<br/>See description of individual variables for details.<br/>Leave string and numeric variables as `null` to use default value.<br/>Individual variable settings (non-null) override settings in context object,<br/>except for attributes, tags, and additional\_tag\_map, which are merged. | `any` | <pre>{<br/>  "additional_tag_map": {},<br/>  "attributes": [],<br/>  "delimiter": null,<br/>  "descriptor_formats": {},<br/>  "enabled": true,<br/>  "environment": null,<br/>  "id_length_limit": null,<br/>  "label_key_case": null,<br/>  "label_order": [],<br/>  "label_value_case": null,<br/>  "labels_as_tags": [<br/>    "unset"<br/>  ],<br/>  "name": null,<br/>  "namespace": null,<br/>  "regex_replace_chars": null,<br/>  "stage": null,<br/>  "tags": {},<br/>  "tenant": null<br/>}</pre> | no |
 | <a name="input_delegated_administrator_account_name"></a> [delegated\_administrator\_account\_name](#input\_delegated\_administrator\_account\_name) | The name of the account that is the AWS Organization Delegated Administrator account | `string` | `"core-security"` | no |
 | <a name="input_delimiter"></a> [delimiter](#input\_delimiter) | Delimiter to be used between ID elements.<br/>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `null` | no |
