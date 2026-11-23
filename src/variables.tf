@@ -79,6 +79,22 @@ variable "auto_enable_lambda_code" {
   default     = false
 }
 
+variable "enabler_timeouts" {
+  description = <<-EOT
+    Create, update and delete timeouts for the `aws_inspector2_enabler` resources (delegated administrator and member
+    accounts). The enabler waits until every account and resource type reaches the target status, which can take longer
+    than the provider's 5 minute default when scanning is activated for many member accounts at once.
+    The defaults match the provider defaults.
+    EOT
+  type = object({
+    create = optional(string, "5m")
+    update = optional(string, "5m")
+    delete = optional(string, "5m")
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "account_map_tenant" {
   type        = string
   default     = "core"

@@ -41,6 +41,12 @@ resource "aws_inspector2_enabler" "delegated_admin" {
 
   account_ids    = [local.org_delegated_administrator_account_id]
   resource_types = local.resource_types
+
+  timeouts {
+    create = var.enabler_timeouts.create
+    update = var.enabler_timeouts.update
+    delete = var.enabler_timeouts.delete
+  }
 }
 
 # If we are are in the AWS Organization designated administrator account,
@@ -64,6 +70,12 @@ resource "aws_inspector2_enabler" "member_accounts" {
 
   account_ids    = local.member_account_ids
   resource_types = local.resource_types
+
+  timeouts {
+    create = var.enabler_timeouts.create
+    update = var.enabler_timeouts.update
+    delete = var.enabler_timeouts.delete
+  }
 }
 
 resource "aws_inspector2_member_association" "default" {
