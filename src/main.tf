@@ -14,7 +14,15 @@ locals {
   create_org_delegation    = local.enabled && local.is_org_management_account
   create_org_configuration = local.enabled && local.is_org_delegated_administrator_account && var.admin_delegated
 
-  resource_types = compact([var.auto_enable_ec2 ? "EC2" : null, var.auto_enable_ecr ? "ECR" : null, var.auto_enable_lambda ? "LAMBDA" : null])
+  # Lambda code scanning requires Lambda standard scanning.
+  lambda_code_enabled = var.auto_enable_lambda && var.auto_enable_lambda_code
+
+  resource_types = compact([
+    var.auto_enable_ec2 ? "EC2" : null,
+    var.auto_enable_ecr ? "ECR" : null,
+    var.auto_enable_lambda ? "LAMBDA" : null,
+    local.lambda_code_enabled ? "LAMBDA_CODE" : null,
+  ])
 }
 
 data "aws_caller_identity" "this" {
@@ -48,9 +56,10 @@ resource "aws_inspector2_organization_configuration" "default" {
 
   depends_on = [aws_inspector2_enabler.delegated_admin]
   auto_enable {
-    ec2    = var.auto_enable_ec2
-    ecr    = var.auto_enable_ecr
-    lambda = var.auto_enable_lambda
+    ec2         = var.auto_enable_ec2
+    ecr         = var.auto_enable_ecr
+    lambda      = var.auto_enable_lambda
+    lambda_code = local.lambda_code_enabled
   }
 }
 

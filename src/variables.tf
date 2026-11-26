@@ -69,6 +69,16 @@ variable "auto_enable_lambda" {
   default     = true
 }
 
+variable "auto_enable_lambda_code" {
+  description = <<-EOT
+    Whether AWS Lambda code scans are enabled for the delegated administrator and existing member accounts, and
+    automatically enabled for new members of the Amazon Inspector organization. Lambda code scanning requires Lambda
+    standard scanning, so it only takes effect when `auto_enable_lambda` is also `true`.
+    EOT
+  type        = bool
+  default     = false
+}
+
 variable "enabler_timeouts" {
   description = <<-EOT
     Create, update and delete timeouts for the `aws_inspector2_enabler` resources (delegated administrator and member
